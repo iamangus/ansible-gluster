@@ -40,6 +40,12 @@
   run_once: yes
   register: pub_key
 
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: /etc/sysconfig/storhaug.d
+    state: directory
+    mode: '0755'
+
 - name: print all returned values
   debug:
     msg: "{{ pub_key }}"
