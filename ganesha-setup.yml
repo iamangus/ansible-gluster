@@ -1,0 +1,6 @@
+---
+- hosts: glusts
+  become: True
+
+  roles:
+    - ganeshasetup
