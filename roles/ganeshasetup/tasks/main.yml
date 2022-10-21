@@ -25,7 +25,7 @@
 - name: Install ctdb
   ansible.builtin.package:
     name: "ctdb"
-    state: present
+    state: latest
 
 - name: populate ctdb config
   ansible.builtin.template:
