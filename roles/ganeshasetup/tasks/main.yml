@@ -50,3 +50,9 @@
     owner: root
     group: root
     mode: '0600'
+
+- name: Start and enable ctdb
+  ansible.builtin.service:
+    name: ctdb
+    state: started
+    enabled: yes
