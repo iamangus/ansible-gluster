@@ -3,6 +3,11 @@
     name: "nfs-ganesha-gluster"
     state: present
 
+- name: Install nfs-utils
+  ansible.builtin.package:
+    name: "nfs-ganesha-gluster"
+    state: present
+
 - name: populate ganesha config
   ansible.builtin.template:
     src: ../files/ganesha.conf.j2
@@ -16,3 +21,17 @@
     name: nfs-ganesha
     state: started
     enabled: yes
+
+- name: Install storhaug-nfs
+  ansible.builtin.package:
+    name: "storhaug-nfs"
+    state: present
+
+- name: Generate an OpenSSH keypair with the default values (4096 bits, rsa)
+  community.crypto.openssh_keypair:
+    path: /etc/sysconfig/storhaug.d/secret.pem
+  register: pub_key
+
+- name: print all returned values
+  debug:
+    msg: "{{ pub_key }}"
