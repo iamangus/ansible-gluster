@@ -24,11 +24,13 @@
 
 - name: Install storhaug
   ansible.builtin.yum:
+    disable_gpg_check: yes
     name: https://img.cs.montana.edu/linux/centos/7/storage/x86_64/nfsganesha-30/Packages/s/storhaug-1.0-1.el7.noarch.rpm
     state: present
 
 - name: Install storhaug-nfs
   ansible.builtin.yum:
+    disable_gpg_check: yes
     name: https://img.cs.montana.edu/linux/centos/7/storage/x86_64/nfsganesha-30/Packages/s/storhaug-nfs-1.0-1.el7.noarch.rpm
     state: present
 
