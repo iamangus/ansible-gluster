@@ -13,7 +13,7 @@
     create: yes
     validate: 'visudo -cf %s'
 
-- name: Install trizen using makepkg if it isn't installed already
+- name: Install nfs-ganesha-git using makepkg if it isn't installed already
   kewlfft.aur.aur:
     name: nfs-ganesha-git
     use: makepkg
