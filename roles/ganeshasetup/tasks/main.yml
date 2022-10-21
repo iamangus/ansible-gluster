@@ -15,7 +15,7 @@
 
 - name: Install trizen using makepkg if it isn't installed already
   kewlfft.aur.aur:
-    name: nfs-ganesha
+    name: nfs-ganesha-git
     use: makepkg
     state: latest
   become: yes
