@@ -27,7 +27,7 @@
     name: "ctdb"
     state: present
 
-- name: populate ganesha config
+- name: populate ctdb config
   ansible.builtin.template:
     src: ../files/ctdb.j2
     dest: /etc/sysconfig/ctdb
@@ -35,7 +35,7 @@
     group: root
     mode: '0600'
 
-- name: populate ganesha config
+- name: populate ctdb vip config
   ansible.builtin.template:
     src: ../files/public_addresses.j2
     dest: /etc/ctdb/public_addresses
@@ -43,7 +43,7 @@
     group: root
     mode: '0600'
 
-- name: populate ganesha config
+- name: populate ctdb node config
   ansible.builtin.template:
     src: ../files/nodes.j2
     dest: /etc/ctdb/nodes
