@@ -17,6 +17,6 @@
   kewlfft.aur.aur:
     name: nfs-ganesha
     use: makepkg
-    state: present
+    state: latest
   become: yes
   become_user: aur_builder
