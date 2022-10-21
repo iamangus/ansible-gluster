@@ -21,5 +21,7 @@
         mountpoint: /mnt/gv0
         rebalance: no
 
+    ansible_selinux.status: disabled
+
   roles:
     - glustersetup
