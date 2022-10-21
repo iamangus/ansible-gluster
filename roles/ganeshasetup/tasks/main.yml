@@ -22,9 +22,9 @@
     state: started
     enabled: yes
 
-- name: Install storhaug-nfs
-  ansible.builtin.package:
-    name: "storhaug-nfs"
+- name: Install storhaug
+  ansible.builtin.yum:
+    name: https://img.cs.montana.edu/linux/centos/7/storage/x86_64/nfsganesha-30/Packages/s/storhaug-nfs-1.0-1.el7.noarch.rpm
     state: present
 
 - name: Generate an OpenSSH keypair with the default values (4096 bits, rsa)
