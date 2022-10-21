@@ -43,27 +43,27 @@
     name: "glusterfs-server"
     state: present
 
-- name: Configure selinux
-  block:
-    - name: Set selinux boolean nis_enabled to yes
-      ansible.posix.seboolean:
-        name: nis_enabled
-        state: yes
-        persistent: yes
-
-    - name: Place selinux type enforcement
-      ansible.builtin.copy:
-        src: "{{ item }}.te"
-        dest: "/etc/glusterfs/{{ item }}.te"
-        mode: "0640"
-      loop: "{{ glusterfs_selinux_local_policies }}"
-      notify:
-        - Create selinux mod for glusterfs
-        - Create selinux pp for glusterfs
-        - Load selinux pp for glusterfs
-  when:
-    - ansible_selinux.status is defined
-    - ansible_selinux.status == "enabled"
+#- name: Configure selinux
+#  block:
+#    - name: Set selinux boolean nis_enabled to yes
+#      ansible.posix.seboolean:
+#        name: nis_enabled
+#        state: yes
+#        persistent: yes
+#
+#    - name: Place selinux type enforcement
+#      ansible.builtin.copy:
+#        src: "{{ item }}.te"
+#        dest: "/etc/glusterfs/{{ item }}.te"
+#        mode: "0640"
+#      loop: "{{ glusterfs_selinux_local_policies }}"
+#      notify:
+#        - Create selinux mod for glusterfs
+#        - Create selinux pp for glusterfs
+#        - Load selinux pp for glusterfs
+#  when:
+#    - ansible_selinux.status is defined
+#    - ansible_selinux.status == "enabled"
 
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
