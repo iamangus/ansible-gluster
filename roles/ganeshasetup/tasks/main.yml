@@ -30,6 +30,7 @@
 - name: Generate an OpenSSH keypair with the default values (4096 bits, rsa)
   community.crypto.openssh_keypair:
     path: /etc/sysconfig/storhaug.d/secret.pem
+  run_once: yes
   register: pub_key
 
 - name: print all returned values
