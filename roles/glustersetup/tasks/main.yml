@@ -40,7 +40,7 @@
 
 - name: Install gluster
   ansible.builtin.package:
-    name: "glusterfs"
+    name: "glusterfs-server"
     state: present
 
 - name: Configure selinux
