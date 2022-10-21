@@ -22,30 +22,31 @@
     state: started
     enabled: yes
 
-- name: Install storhaug
-  ansible.builtin.yum:
-    disable_gpg_check: yes
-    name: https://img.cs.montana.edu/linux/centos/7/storage/x86_64/nfsganesha-30/Packages/s/storhaug-1.0-1.el7.noarch.rpm
+- name: Install ctdb
+  ansible.builtin.package:
+    name: "ctdb"
     state: present
 
-- name: Install storhaug-nfs
-  ansible.builtin.yum:
-    disable_gpg_check: yes
-    name: https://img.cs.montana.edu/linux/centos/7/storage/x86_64/nfsganesha-30/Packages/s/storhaug-nfs-1.0-1.el7.noarch.rpm
-    state: present
+- name: populate ganesha config
+  ansible.builtin.template:
+    src: ../files/ctdb.j2
+    dest: /etc/sysconfig/ctdb
+    owner: root
+    group: root
+    mode: '0600'
 
-- name: Create a directory if it does not exist
-  ansible.builtin.file:
-    path: /etc/sysconfig/storhaug.d
-    state: directory
-    mode: '0755'
+- name: populate ganesha config
+  ansible.builtin.template:
+    src: ../files/public_addresses.j2
+    dest: /etc/ctdb/public_addresses
+    owner: root
+    group: root
+    mode: '0600'
 
-- name: Generate an OpenSSH keypair with the default values (4096 bits, rsa)
-  community.crypto.openssh_keypair:
-    path: /etc/sysconfig/storhaug.d/secret.pem
-  run_once: yes
-  register: pub_key
-
-- name: print all returned values
-  debug:
-    msg: "{{ pub_key }}"
+- name: populate ganesha config
+  ansible.builtin.template:
+    src: ../files/nodes.j2
+    dest: /etc/ctdb/nodes
+    owner: root
+    group: root
+    mode: '0600'
