@@ -1,22 +1,18 @@
-- name: Create the `aur_builder` user
-  become: yes
-  ansible.builtin.user:
-    name: aur_builder
-    create_home: yes
-    group: wheel
+- name: Install nfs-ganesha-gluster
+  ansible.builtin.package:
+    name: "nfs-ganesha-gluster"
+    state: present
 
-- name: Allow the `aur_builder` user to run `sudo pacman` without a password
-  become: yes
-  ansible.builtin.lineinfile:
-    path: /etc/sudoers.d/11-install-aur_builder
-    line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
-    create: yes
-    validate: 'visudo -cf %s'
+- name: populate ganesha config
+  ansible.builtin.template:
+    src: ../files/ganesha.conf.j2
+    dest: /etc/ganesha/ganesha.conf
+    owner: root
+    group: root
+    mode: '0600'
 
-- name: Install nfs-ganesha-git using makepkg if it isn't installed already
-  kewlfft.aur.aur:
-    name: nfs-ganesha-git
-    use: makepkg
-    state: latest
-  become: yes
-  become_user: aur_builder
+- name: Start and enable nfs-ganesha
+  ansible.builtin.service:
+    name: nfs-ganesha
+    state: started
+    enabled: yes
